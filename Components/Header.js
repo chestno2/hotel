@@ -23,7 +23,7 @@ function Header() {
          {/* Right Div */}
          <div className=" flex items-center justify-end text-gray-500 space-x-4 " >
                 <p className=" hidden md:inline cursor-pointer " >Become a host</p>
-              <GlobeAltIcon className=" cursor-pointer h-6" />
+              <GlobeAltIcon className=" hidden sm:inline-flex  cursor-pointer h-6" />
               <div className=" h-6 flex items-center  space-x-2   border-2 p-2  rounded-full " >
                   <MenuIcon className=" h-6" />
                   <UserCircleIcon className=" h-6"  />
