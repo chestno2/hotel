@@ -1,7 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from "next/image"
-import {GlobeAltIcon, MenuIcon, SearchIcon, UserCircleIcon} from "@heroicons/react/solid"
+import {GlobeAltIcon, MenuIcon, SearchIcon, UserCircleIcon,UserIcon} from "@heroicons/react/solid"
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+// import { Calendar } from 'react-date-range';
+import { DateRangePicker } from 'react-date-range';
+
 function Header() {
+    
+     const [searchInput, setSearchInput] = useState("")
+     const [startDate,setStartDate] =useState(new Date())
+     const [endDate,setEndDate] =useState(new Date());
+     const [noofGuest,setnoofGuest] =useState(1);
+     const handleChange=(ranges)=>{
+         console.log(ranges);
+      setStartDate(ranges.selection.startDate)
+      setEndDate(ranges.selection.endDate)
+    }
+    const resetInput = ()=>{
+        setSearchInput("")
+    }
+     const selectionRange ={
+        startDate:startDate ,
+        endDate: endDate,
+        key: 'selection',  
+        // the selection is important
+     }
     return (
         <header className=" sticky top-0 z-50 grid  grid-cols-3 bg-white shadow-md  p-5 md:px-10" >
             {/* Left Div */}
@@ -17,7 +41,12 @@ function Header() {
        
          <div className=" flex  items-center md:border-2
           rounded-full py-2 md:shadow-sm " >
-         <input type="text"  placeholder=" Start Your Search  " className=" flex-grow pl-5 bg-transparent outline-none " />
+         <input
+         value={searchInput}
+         onChange={(e)=>setSearchInput(e.target.value)}
+            type="text"
+            placeholder=" Start Your Search"
+             className=" flex-grow pl-5 bg-transparent outline-none " />
           <SearchIcon className=" hidden md:inline-flex cursor-pointer h-8 bg-red-400 text-white rounded-full p-2 md:mx-2 " />
          </div>
          {/* Right Div */}
@@ -29,6 +58,31 @@ function Header() {
                   <UserCircleIcon className=" h-6"  />
               </div>
          </div>
+         {searchInput&&(
+           <div className=" flex flex-col col-span-3 mx-auto z-50 " >
+             <DateRangePicker
+              ranges={[selectionRange]}
+              minDate={new Date()}
+               rangeColors={["#FD5B61"]} 
+               onChange={handleChange}/>
+              <div className=" flex items-center border-b mb-4 " >
+                  <h2 className=" text-2xl  flex-grow  font-semibold "  >Number of Guests </h2>
+                  <UserIcon className=" h-5 "  />
+                  <input 
+                  value={noofGuest}
+                  onChange={(e)=>setnoofGuest(e.target.value)}
+                  type="number"
+                  min={1}
+                   className=" w-12 pl-2 outline-none 
+                   text-lg text-red-400 " />
+                   
+              </div>
+              <div className=" flex   " >
+                  <button onClick={resetInput} className=" flex-grow text-gray-400 " >Cancel</button>
+                  <button className=" flex-grow  text-red-500" >Search</button>
+              </div>
+           </div>
+         )}
         </header>
     )
 }

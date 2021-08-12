@@ -25,7 +25,7 @@ export default function Home({exploreData,cardData}) {
       <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"  >    
        {/* Pull Data from an api */}
          {exploreData?.map(({img,location,distance})=>(
-         <SmallCard image={img} distance={distance} location={location} />
+         <SmallCard key={img} image={img} distance={distance} location={location} />
          ))}
          </div>
         </section>
