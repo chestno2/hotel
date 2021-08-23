@@ -27,11 +27,20 @@ function Header({placeholder}) {
            pathname:"/search",
            query:{
                location:searchInput,
-               startDate:startDate.toISOString(),
+               startDate: startDate.toISOString(),
                endDate:endDate.toISOString(),
                noofGuest
+               
            }
-       })
+        }
+           )
+        //    query:{
+        //        location:searchInput,
+        //        startDate:startDate.toISOString(),
+        //        endDate:endDate.toISOString(),
+        //        noofGuest
+        //    }
+    
       
 
     }
